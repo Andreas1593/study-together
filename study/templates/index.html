@@ -1,0 +1,311 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div id="subjects-view">
+  <div class="row">
+    <div class="col">
+      <div id="subject__message"></div>
+    </div>
+  </div>
+  <div class="row py-5 px-2 mt-3 px-md-4 py-md-0 p-xl-3 px-xl-5 justify-content-center justify-content-xl-start" id="subject__box">
+      <div class="col-auto p-2 p-xl-3">
+          <button type="button" id="subject__create-button" data-bs-toggle="modal" data-bs-target="#subject__modal">
+            <div>+ New subject</div>
+            <i class="bi bi-book"></i>
+          </button>
+      </div>
+  </div>
+</div>
+
+<div id="cards-view">
+  <div class="row p-4 pb-xl-0 justify-content-center">
+    <div class="col-10 p-0 text-center cards__name-wrapper">
+      <h4 id="cards__name"></h4>
+    </div>
+  </div>
+  <div class="row p-xl-3 pt-xl-0 justify-content-between">
+    <div class="col-6 col-xl-2 text-start">
+      <button type="button" id="cards__create-button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#card__modal">
+        Create new Card
+      </button>
+      <button type="button" id="cards__study-button" class="btn btn-warning mt-2">
+        Study!
+      </button>
+    </div>
+    <div class="col-6 col-xl-2 text-end">
+      <button id="cards__delete-button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#warning__modal">Delete Subject</button>
+      <button id="cards__back-button" class="btn btn-secondary mt-2">Back</button>
+    </div>
+  </div>
+  <div class="row p-3 justify-content-center">
+    <div class="col text-center">
+      <div id="cards__count">Index Cards: <span>0</span></div>
+    </div>
+    <div class="col text-center">
+      <div id="cards__rate">Correct on the first try: <span>0</span></div>
+    </div>
+  </div>
+  <div class="row">
+
+  </div>
+  <div class="row p-3 justify-content-center" id="card__box">
+</div>
+</div>
+
+<div id="groups-view">
+  <div class="row p-2 pt-5 mt-3 p-xl-3 pt-xl-4">
+    <div class="col">
+      <div>Set one of your groups as active group - its subjects and cards will be displayed under "Index Cards"</div>
+    </div>
+  </div>
+  <div class="row p-2 px-xl-3 pt-xl-0 pb-xl-4">
+    <div class="col-12 col-md-8 pb-md-1 col-xl-4">
+        <select name="groups" id="group__active-select" class="form-select" aria-label="Group select">
+        </select>
+    </div>
+  </div>
+  <hr>
+  <div class="row p-2 pt-4 p-xl-3 pt-xl-4 pb-xl-2">
+    <div class="col">
+      <div>Create your own group</div>
+    </div>
+  </div>
+  <div class="row p-2 py-2 p-xl-3 pt-xl-0">
+    <div class="col-12 col-md-8 pb-md-1 col-xl-4 py-xl-2">
+        <input name="group" id="group__create-input" class="form-control" maxlength="64" placeholder="Enter a groupname...">
+    </div>
+    <div class="col-12 pt-2 col-md-12 text-md-end col-xl-4 py-xl-2 text-xl-start">
+        <button class="btn btn-success" id="group__create-button">Create</button>
+    </div>
+  </div>
+  <div class="row p-2 p-xl-3 pt-xl-4">
+    <div class="col">
+      <div>Join an existing group</div>
+    </div>
+  </div>
+  <div class="row p-2 py-2 p-xl-3 pt-xl-0">
+    <div class="col-12 col-md-8 col-xl-4">
+        <input id="group__search-input" class="form-control" maxlength="64" placeholder="Search for a group...">
+    </div>
+  </div>
+  <div class="row p-2 py-2 p-xl-3 pt-xl-4">
+    <div class="col-12 py-1 col-xl-6">
+      <div id="group__search-matches" class="list-group">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="activeGroup-view">
+  <div class="row p-3 pt-5 pb-4 mt-3">
+      <div class="col">
+        <div id="activeGroup__name"></div>
+      </div>
+      <div class="col pt-2 text-end">
+        <button class="btn btn-danger" id="activeGroup__delete-button" data-bs-toggle="modal" data-bs-target="#warning__modal">Delete Group</button>
+      </div>
+  </div>
+  <div class="row p-3 py-3">
+      <div class="col-3 col-xl-2">
+        <div>Admin: </div>
+      </div>
+      <div class="col">
+        <div id="activeGroup__admin" class="list-group">
+          <li class="list-group-item list-group-item-action list-group-item-warning"></li>
+        </div>
+      </div>
+  </div>
+  <div class="row p-3 py-3">
+      <div class="col-3 col-xl-2">
+        <div>Subjects: </div>
+      </div>
+      <div class="col-9 col-xl-10">
+        <div id="activeGroup__subjects" class="list-group"></div>
+      </div>
+  </div>
+  <div class="row p-3 py-3">
+      <div class="col-3 col-xl-2">
+        <div>Members: </div>
+      </div>
+      <div class="col-9 col-xl-10">
+        <div id="activeGroup__members" class="list-group"></div>
+      </div>
+  </div>
+  <div class="row p-3 py-3">
+      <div class="col-3 col-xl-2">
+        <div>Join requests: </div>
+      </div>
+      <div class="col-9 col-xl-10">
+        <div id="activeGroup__requests" class="list-group"></div>
+      </div>
+  </div>
+</div>
+
+<div id="profile-view">
+  <div class="row p-3 pt-5 mt-3 pb-1">
+      <div class="col">
+        <div id="profile__name"></div>
+      </div>
+  </div>
+  <div class="row p-3 pt-1">
+      <div class="col">
+        <div id="profile__dateJoined"></div>
+      </div>
+  </div>
+  <div class="row p-3 pt-4 pb-2">
+    <div class="col-9 col-xl-2">
+      <div id="profile__total-text">Cards answered total: </div>
+    </div>
+    <div class="col px-4">
+      <div id="profile__total" class="list-group">0</div>
+    </div>
+  </div>
+  <div class="row p-3 pt-2 pb-4">
+    <div class="col-9 col-xl-2">
+      <div id="profile__rate-text">Correct on the first try: </div>
+    </div>
+    <div class="col px-4">
+      <div id="profile__rate" class="list-group">0%</div>
+    </div>
+  </div>
+  <div class="row p-3 py-4">
+    <div class="col-12 col-xl-2">
+      <div id="profile__groups-text">Your groups: </div>
+    </div>
+    <div class="col-12 py-3 col-xl-9 py-xl-0">
+      <div id="profile__groups" class="list-group"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Create new subject modal -->
+<div class="modal fade" id="subject__modal" tabindex="-1" role="dialog" aria-labelledby="newSubjectModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create new subject</h5>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="subject__modal-input" class="form-control" maxlength="50">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="subject__modal-cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="subject__modal-create" class="btn btn-success" data-bs-dismiss="modal">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card modal -->
+<div class="modal fade" id="card__modal" tabindex="-1" role="dialog" aria-labelledby="cardModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-front-input" role="textbox">
+                Text front
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="flip-card-back-input" role="textbox">
+                Text back
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <i class="bi bi-arrow-repeat"></i>
+        <button type="button" id="card__modal-cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="card__modal-create" class="btn btn-success" data-bs-dismiss="modal">Create</button>
+        <button type="button" id="card__modal-confirm" class="btn btn-success">Confirm</button>
+        <button type="button" id="card__modal-edit" class="btn btn-dark">Edit</button>
+        <button type="button" id="card__modal-delete" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+      </div>
+      <div id="display"></div>
+      <div id="correct">
+          <button><div class="cooldown-div"></div></button>
+      </div>
+      <div id="false">
+        <button><div class="cooldown-div"></div></button>
+      </div>
+      <div id="end">
+        <button>End Study</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Group view modal -->
+<div class="modal fade" id="group__modal" tabindex="-1" role="dialog" aria-labelledby="groupModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div>Members: </div>
+          </div>
+          <div class="col">
+            <div id="members"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div>Subjects: </div>
+          </div>
+          <div class="col">
+            <div id="subjects"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="group__modal-button">Join</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Warning modal -->
+<div class="modal fade" id="warning__modal" tabindex="-1" role="dialog" aria-labelledby="warningModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" id="warning__modal-header">
+        <div class="modal-title"></div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div id="warning__modal-message" class="red"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" id="warning__modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="warning__modal-yes">Yes</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="warning__modal-no">No</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="warning__modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4999">
+    <div class="toast-header">
+      <img src="{% static 'images/success.png' %}" class="rounded me-2" alt="Success" width="20" height="20">
+      <strong class="me-auto">Message</strong>
+      <small>now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+    </div>
+  </div>
+</div>
+{% endblock %}
