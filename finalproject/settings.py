@@ -57,7 +57,7 @@ PWA_APP_ICONS = [
 SECRET_KEY = 'django-insecure-5=4of$t&2_h77q3kf6(1ykjg#g-g6d_pj&21(wg5l=*rp6)x-d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Fix 'MIME type' error when importing js modules
 if DEBUG:
