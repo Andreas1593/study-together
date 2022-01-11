@@ -116,15 +116,22 @@ WSGI_APPLICATION = 'finalproject.wsgi.application'
 
 DATABASES = {
 
-    'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'postgresql-concentric-66000',
-    'USER': 'dsbygtddcvwckx',
-    'PASSWORD': '26fa7550bc6c9568a3f38b22d950d6e5e99b7f88c40c661b380b89f5af4c74e1',
-    'HOST': 'ec2-34-195-69-118.compute-1.amazonaws.com',
-    'PORT': '5432',
+    'local': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'studytogether',
+        'USER': 'Andi',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '5432',
     },
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgresql-concentric-66000',
+        'USER': 'dsbygtddcvwckx',
+        'PASSWORD': '26fa7550bc6c9568a3f38b22d950d6e5e99b7f88c40c661b380b89f5af4c74e1',
+        'HOST': 'ec2-34-195-69-118.compute-1.amazonaws.com',
+        'PORT': '5432',
+    },
     'notdefault': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
@@ -183,4 +190,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if "DYNO" in os.environ:
     STATIC_ROOT = 'static'
     ALLOWED_HOSTS = ['studytogetherapp.herokuapp.com']
-    DEBUG = True
+    DEBUG = False
