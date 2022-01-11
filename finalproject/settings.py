@@ -126,7 +126,7 @@ DATABASES = {
     },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgresql-concentric-66000',
+        'NAME': 'd17f45dbi7rduu',
         'USER': 'dsbygtddcvwckx',
         'PASSWORD': '26fa7550bc6c9568a3f38b22d950d6e5e99b7f88c40c661b380b89f5af4c74e1',
         'HOST': 'ec2-34-195-69-118.compute-1.amazonaws.com',
