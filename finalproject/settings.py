@@ -183,4 +183,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if "DYNO" in os.environ:
     STATIC_ROOT = 'static'
     ALLOWED_HOSTS = ['studytogetherapp.herokuapp.com']
-    DEBUG = False
+    DEBUG = True
