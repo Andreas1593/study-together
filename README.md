@@ -5,11 +5,12 @@
 
 ![Screenshot mobile](https://github.com/Andreas1593/CS50W/blob/Final-Project/finalproject/study/static/images/mobile.gif?raw=true)
 
+#### URL: https://studytogetherapp.herokuapp.com/
 #### Description:
 
 ##### General
 
-My final project for CS50's Web Programming with Python and JavaScript is a single-page application called "Study together!".
+My final project for CS50's Web Programming with Python and JavaScript is a progressive single-page web application called "Study together!".
 
 
 ##### Basic concept
