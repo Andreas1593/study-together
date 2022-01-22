@@ -29,10 +29,72 @@
         {% csrf_token %}
     </div>
     
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-        <!-- Mobile navbar -->
-        <div class="p-3 text-white bg-dark" id="navbar-mobile">
-            <i class="bi bi-mortarboard mx-3 icon"></i>
+    {% block navbar %}
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+            <!-- Mobile navbar -->
+            <div class="p-3 text-white bg-dark" id="navbar-mobile">
+                <i class="bi bi-mortarboard mx-3 icon"></i>
+                <span class="fs-4">Navigation</span>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <button class="subjects nav-link text-white active" aria-current="page">
+                            <i class="bi bi-card-checklist"></i>
+                            <span>Index Cards</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="groups nav-link text-white">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Groups</span>
+                        </button>
+                    </li>
+                    <li class="activeGroupElement">
+                        <button class="activeGroup nav-link text-white">
+                            <i class="bi bi-person-check"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="profile nav-link text-white">
+                            <i class="bi bi-person-circle"></i>
+                            <span>Profile</span>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">
+                            <button class="nav-link text-white">
+                                <i class="bi bi-box-arrow-left"></i>
+                                <span>Logout</span>
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="logo">
+                    <img src="{% static './images/logo.png' %}">
+                </div>
+
+                {% if user.is_authenticated %}
+                <div class="change-font">
+                    <button class="btn btn-light">Change Font</button>
+                </div>
+                <div class="username">
+                    Logged in as <div>{{ user.username }}</div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Mobile navbar toggle button -->
+            <button id="navbar-mobile-toggle" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvas">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+
+
+
+        <!-- Desktop navbar -->
+        <div class="p-3 text-white bg-dark" id="navbar">
+            <i class="bi bi-mortarboard mx-2 m-lg-3 icon"></i>
             <span class="fs-4">Navigation</span>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
@@ -78,71 +140,11 @@
                 <button class="btn btn-light">Change Font</button>
             </div>
             <div class="username">
-                Logged in as <span>{{ user.username }}</span>.
+                Logged in as <div>{{ user.username }}</div>
             </div>
             {% endif %}
         </div>
-
-        <!-- Mobile navbar toggle button -->
-        <button id="navbar-mobile-toggle" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvas">
-            <i class="bi bi-list"></i>
-        </button>
-    </div>
-
-
-
-    <!-- Desktop navbar -->
-    <div class="p-3 text-white bg-dark" id="navbar">
-        <i class="bi bi-mortarboard mx-2 m-lg-3 icon"></i>
-        <span class="fs-4">Navigation</span>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <button class="subjects nav-link text-white active" aria-current="page">
-                    <i class="bi bi-card-checklist"></i>
-                    <span>Index Cards</span>
-                </button>
-            </li>
-            <li>
-                <button class="groups nav-link text-white">
-                    <i class="bi bi-people-fill"></i>
-                    <span>Groups</span>
-                </button>
-            </li>
-            <li class="activeGroupElement">
-                <button class="activeGroup nav-link text-white">
-                    <i class="bi bi-person-check"></i>
-                </button>
-            </li>
-            <li>
-                <button class="profile nav-link text-white">
-                    <i class="bi bi-person-circle"></i>
-                    <span>Profile</span>
-                </button>
-            </li>
-            <li>
-                <a href="{% url 'logout' %}">
-                    <button class="nav-link text-white">
-                        <i class="bi bi-box-arrow-left"></i>
-                        <span>Logout</span>
-                    </button>
-                </a>
-            </li>
-        </ul>
-
-        <div class="logo">
-            <img src="{% static './images/logo.png' %}">
-        </div>
-
-        {% if user.is_authenticated %}
-        <div class="change-font">
-            <button class="btn btn-light">Change Font</button>
-        </div>
-        <div class="username">
-            Logged in as <span>{{ user.username }}</span>.
-        </div>
-        {% endif %}
-    </div>
+    {% endblock %}
 
     <div id="content">
         <div class="container-fluid py-0">

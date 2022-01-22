@@ -419,9 +419,10 @@ function setActiveGroup() {
         }), csrftoken,
         mode: 'same-origin',
     })
+    .then(response => response.text())
     .then(response => {
         // Group successfully set as active group
-        if (response.status === 201) {
+        if (response === "SET") {
             showToast(`Group <i style="color:blue">${activeGroup}</i> set as active group`, 'success');
         }
     });

@@ -422,10 +422,13 @@ def user(request, username):
         else:
             # Set new active group
             activeGroup = activeGroup[0]
-            activeGroup.group = selectedGroup
-            activeGroup.save()
+            if activeGroup.group == selectedGroup:
+                return HttpResponse("ALREADY")
+            else:
+                activeGroup.group = selectedGroup
+                activeGroup.save()
 
-        return HttpResponse(status=201)
+        return HttpResponse("SET")
 
 
 # API to fetch the user's total winrate

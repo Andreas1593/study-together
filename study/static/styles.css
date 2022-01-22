@@ -8,7 +8,7 @@
     width: 15vw;
     left: 0;
 }
-#navbar > .bi.bi-mortarboard, #navbar > span, #navbar > .username > span:hover {
+#navbar > .bi.bi-mortarboard, #navbar > span, #navbar > .username > div:hover {
     cursor: pointer;
 }
 #navbar-mobile {
@@ -65,7 +65,7 @@
         display: none;
     }
     .change-font button {
-        font-size: smaller;
+        font-size: 10px;
     }
     .username {
         position: fixed;
@@ -146,7 +146,7 @@
 
 .bi-check-circle-fill, .bi-x-octagon-fill {
     position: absolute;
-    top: 6px;
+    top: 10px;
     font-size: larger;
     cursor: pointer;
 }
@@ -188,7 +188,7 @@ body {
         #card__modal i {
             position: absolute;
             left: 50%;
-            transform: translate(-50%, 0);
+            transform: translate(-50%, 10%);
             visibility: visible;
             font-size: 3em;
         }
@@ -208,6 +208,13 @@ body {
     #card__modal .modal-content {
         width: 95vw;
         height: 75vw;
+    }
+    #card__modal i {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        visibility: visible;
+        font-size: 3em;
     }
 }
 @media (max-width: 812px) and (orientation: landscape) {
@@ -252,16 +259,16 @@ body {
 
 .change-font {
     position: absolute;
-    bottom: 4em;
+    bottom: 5.5em;
 }
 @media (max-width: 767px) {
     .change-font {
-        bottom: 4em;
+        bottom: 5.5em;
     }
 }
 @media (max-width: 812px) and (orientation: landscape) {
     .change-font {
-        bottom: 2.3em;
+        bottom: 3.5em;
     }
 }
 
@@ -278,6 +285,13 @@ body {
     background-image: linear-gradient(315deg, #ffcab1 0%, #ecdcb0 74%);
 }
 
+#content--full {
+    position: absolute;
+    min-height: 100vh;
+    width: 100vw;
+    background-color: #aecad6;
+    background-image: linear-gradient(315deg, #ffcab1 0%, #ecdcb0 74%);
+}
 
 @media (max-width: 767px) {
     #content {
@@ -845,8 +859,9 @@ body {
     position: absolute;
     bottom: 1em;
     font-size: larger;
+    white-space: nowrap;
 }
-    .username span {
+    .username div {
         color: gold;
     }
 @media (max-width: 812px) and (orientation: landscape) {

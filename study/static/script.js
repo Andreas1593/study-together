@@ -18,7 +18,7 @@ $(document).ready(async function() {
     $(' #navbar > span').on('click', load_subjects);
 
     // Clicking the username in the navigation also loads the profile view
-    $('#navbar > .username > span').on('click', load_profile);
+    $('#navbar > .username > div').on('click', load_profile);
 
     // Show active group navbar element
     // Also check if user is the admin of the active group
@@ -157,17 +157,26 @@ function load_cards(subject) {
 }
 
 
-function load_groups() {
+async function load_groups() {
 
     changeView('groups');
 
     const $groupsView = $('#groups-view');
 
     // Clear and reload group list
-    reloadGroups();
+    await reloadGroups();
+
+    const $groupSelect = $('#group__active-select', $groupsView);
+
+    // Automatically set active group if user has only 1 group
+    if ($('option', $groupSelect).length === 2) {
+        setActiveGroup();
+        // Create or update active group navbar element
+        showActiveGroup();
+    }
 
     // Set selected group as active group
-    $('#group__active-select', $groupsView).unbind().on('change', async function() {
+    $groupSelect.unbind().on('change', async function() {
         await setActiveGroup();
         // Create or update active group navbar element
         showActiveGroup();
@@ -197,6 +206,10 @@ function load_activeGroup() {
 
         getGroupData(userData['activeGroup'][0])
         .then(groupData => {
+
+            // Global variables
+            window.loggedUser = userData['username'];
+            window.admin = groupData['admin'];
 
             // Active group name
             $('#activeGroup__name', $activeGroupView).html(groupData['name']);
