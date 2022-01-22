@@ -1,9 +1,10 @@
 # Study together!
+#### URL: https://studytogetherapp.herokuapp.com/
 #### Description:
 
 ##### General
 
-My final project for CS50's Web Programming with Python and JavaScript is a single-page application called "Study together!".
+My final project for CS50's Web Programming with Python and JavaScript is a progressive single-page web application called "Study together!".
 
 
 ##### Basic concept
