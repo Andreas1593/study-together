@@ -212,11 +212,48 @@ function enableWriting($cardModal) {
     $('.flip-card-front-input', $cardModal).attr('contenteditable', 'true');
     $('.flip-card-back-input', $cardModal).attr('contenteditable', 'true');
 
+    // Paste text from clipboard as plain text
+    $('.flip-card-front-input', $cardModal).on('paste', function(e) {
+        e.preventDefault();
+        var text = '';
+        if (e.clipboardData || e.originalEvent.clipboardData) {
+            text = (e.originalEvent || e).clipboardData.getData('text/plain');
+        }
+        else if (window.clipboardData) {
+            text = window.clipboardData.getData('Text');
+        }
+        if (document.queryCommandSupported('insertText')) {
+            document.execCommand('insertText', false, text);
+        }
+        else {
+            document.execCommand('paste', false, text);
+        }
+    });
+
+    $('.flip-card-back-input', $cardModal).on('paste', function(e) {
+        e.preventDefault();
+        var text = '';
+        if (e.clipboardData || e.originalEvent.clipboardData) {
+            text = (e.originalEvent || e).clipboardData.getData('text/plain');
+        }
+        else if (window.clipboardData) {
+            text = window.clipboardData.getData('Text');
+        }
+        if (document.queryCommandSupported('insertText')) {
+            document.execCommand('insertText', false, text);
+        }
+        else {
+            document.execCommand('paste', false, text);
+        }
+    });
+
+    /* Disabled because of poor UX
     // Focus input when clicking anyhwere on the card
     $('.flip-card-front', $cardModal).on('click', function() {
         // Move the cursor to the end of input (div)
         focusEnd($('.flip-card-front-input', $cardModal)[0]);
     });
+    */
 }
 
 

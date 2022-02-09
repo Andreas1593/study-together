@@ -50,7 +50,7 @@ const fromCache = request =>
         .then(matching => matching || cache.match('/offline/'))
     );
 
-/* cache the current page to make it available for offline
+// cache the current page to make it available for offline
 const update = request =>
   caches
     .open(CURRENT_CACHE)
@@ -66,4 +66,3 @@ self.addEventListener('fetch', evt => {
   );
   evt.waitUntil(update(evt.request));
 });
-*/
